@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.SearchActivity">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_8"
+        android:layout_marginTop="@dimen/size_8"
+        android:layout_marginEnd="@dimen/size_8"
+        app:layout_constraintLeft_toRightOf="@id/editText_search"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="invisible"/>
+
+    <EditText
+        android:id="@+id/editText_search"
+        android:layout_width="0sp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_8"
+        android:layout_marginTop="@dimen/size_8"
+        android:layout_marginEnd="@dimen/size_8"
+        android:hint="@string/search"
+        android:textSize="@dimen/size_17"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/textView_search"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_search"
+        android:layout_width="@dimen/size_70"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_16"
+        android:text="Search"
+        android:textSize="@dimen/size_17"
+        app:layout_constraintLeft_toRightOf="@id/editText_search"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView_searchTime"
+        app:layout_constraintTop_toBottomOf="@id/editText_search"
+        tools:text="SearchTime: 15"
+        android:textColor="@color/colorAccent"
+        android:layout_marginTop="@dimen/size_8"
+        android:layout_marginStart="@dimen/size_16"
+        android:textStyle="bold"
+        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_search"
+        android:layout_width="0sp"
+        android:layout_height="0sp"
+        android:layout_marginStart="@dimen/size_8"
+        android:layout_marginTop="@dimen/size_8"
+        android:layout_marginEnd="@dimen/size_8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_searchTime"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

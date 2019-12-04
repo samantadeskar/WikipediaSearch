@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/size_8"
+    android:layout_marginTop="@dimen/size_8"
+    android:layout_marginEnd="@dimen/size_8"
+    android:layout_marginBottom="@dimen/size_17"
+    android:background="@color/cardViewBackground"
+    android:orientation="vertical"
+    app:cardCornerRadius="10sp"
+    app:cardElevation="@dimen/size_20">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/size_8"
+        android:layout_marginEnd="@dimen/size_8">
+
+        <TextView
+            android:id="@+id/textView_searchResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_8"
+            android:layout_marginEnd="@dimen/size_8"
+            android:textColor="@color/titleColor"
+            android:textSize="@dimen/size_20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Result" />
+
+        <TextView
+            android:id="@+id/textView_searchResultURL"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_8"
+            android:layout_marginTop="@dimen/size_8"
+            android:layout_marginEnd="@dimen/size_8"
+            android:textColor="@color/linkColor"
+            android:textSize="@dimen/size_17"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView_searchResult"
+            tools:text="URL link" />
+
+        <TextView
+            android:id="@+id/textView_htmlSnippet"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_8"
+            android:layout_marginTop="@dimen/size_8"
+            android:layout_marginEnd="@dimen/size_8"
+            android:paddingBottom="@dimen/size_8"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/size_17"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView_searchResultURL"
+            tools:text="HTML snippet" />
+
+        <ImageView
+            android:id="@+id/imageView_thumbnail"
+            android:layout_width="100sp"
+            android:layout_height="100sp"
+            android:layout_marginStart="@dimen/size_8"
+            android:layout_marginTop="@dimen/size_8"
+            android:layout_marginEnd="@dimen/size_8"
+            android:layout_marginBottom="@dimen/size_8"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView_searchResult" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
