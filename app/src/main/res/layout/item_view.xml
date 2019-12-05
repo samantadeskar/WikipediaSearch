@@ -33,7 +33,7 @@
 
         <TextView
             android:id="@+id/textView_searchResultURL"
-            android:layout_width="0sp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/size_8"
             android:layout_marginTop="@dimen/size_8"
@@ -46,7 +46,7 @@
 
         <TextView
             android:id="@+id/textView_htmlSnippet"
-            android:layout_width="0sp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/size_8"
             android:layout_marginTop="@dimen/size_8"
@@ -57,17 +57,6 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textView_searchResultURL"
             tools:text="HTML snippet" />
-
-        <ImageView
-            android:id="@+id/imageView_thumbnail"
-            android:layout_width="100sp"
-            android:layout_height="100sp"
-            android:layout_marginStart="@dimen/size_8"
-            android:layout_marginTop="@dimen/size_8"
-            android:layout_marginEnd="@dimen/size_8"
-            android:layout_marginBottom="@dimen/size_8"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView_searchResult" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -1,10 +1,10 @@
 package com.deskar.wikipediasearch.model
 
-import com.deskar.wikipediasearch.networking.OperationCallback
+import com.deskar.wikipediasearch.networking.SearchCallback
 
 interface SearchDataSource {
 
-    fun getSearch(query:String, callback: OperationCallback)
+    fun getSearch(query: String, callback: SearchCallback)
     fun cancel()
 
 }

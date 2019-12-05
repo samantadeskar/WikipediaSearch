@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">WikipediaSearch</string>
-    <string name="search">Search...</string>
+    <string name="search">Search…</string>
+    <string name="search2">Search</string>
+    <string name="search_time">Search time:\u0020</string>
+    <string name="sec">\u0020sec</string>
+    <string name="error">Error:\u0020</string>
+    <string name="there_is_no_results">There is no results</string>
 </resources>

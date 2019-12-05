@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.deskar.wikipediasearch.model.SearchResult
 import com.deskar.wikipediasearch.model.SearchDataSource
 import com.deskar.wikipediasearch.model.SearchInformation
-import com.deskar.wikipediasearch.networking.OperationCallback
+import com.deskar.wikipediasearch.networking.SearchCallback
 
 class SearchViewModel(
     private val repository: SearchDataSource
@@ -29,27 +29,31 @@ class SearchViewModel(
     private val _isEmptyList = MutableLiveData<Boolean>()
     val isEmptyList: LiveData<Boolean> = _isEmptyList
 
-    fun loadSearchResults(query:String) {
+    fun loadSearchResults(query: String) {
         _isViewLoading.postValue(true)
         repository.getSearch(query,
-            object : OperationCallback {
-            override fun onError(obj: Any?) {
-                _isViewLoading.postValue(false)
-                _onMessageError.postValue(obj)
-            }
+            object : SearchCallback {
 
-            override fun onSuccess(searchList: List<SearchResult>?, responseTime: SearchInformation?) {
-                _isViewLoading.postValue(false)
-                if (searchList != null) {
-                    if (!searchList.isEmpty() && responseTime != null) {
-                        _searchResults.value = searchList
+                override fun onError(obj: Any?) {
+                    _isViewLoading.postValue(false)
+                    _onMessageError.postValue(obj)
+                }
+
+                override fun onSuccess(
+                    searchList: List<SearchResult>?,
+                    responseTime: SearchInformation?
+                ) {
+                    _isViewLoading.postValue(false)
+                    if (searchList != null && responseTime != null) {
                         _responseTimeResult.value = responseTime.formattedSearchTime
+                        if (searchList.isNotEmpty()) {
+                            _searchResults.value = searchList
+                        }
                     } else {
                         _isEmptyList.postValue(true)
                     }
                 }
-            }
-        })
+            })
     }
 
 

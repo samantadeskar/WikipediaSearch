@@ -1,13 +1,11 @@
 package com.deskar.wikipediasearch.view.adapter
 
-import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.deskar.wikipediasearch.R
 import com.deskar.wikipediasearch.model.SearchResult
@@ -16,7 +14,7 @@ import kotlinx.android.synthetic.main.item_view.view.*
 
 class SearchAdapter(
     private var searchResultList: List<SearchResult>,
-    public val context: Context
+    private val context: Context
 ) : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {

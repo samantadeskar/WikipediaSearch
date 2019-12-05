@@ -1,20 +1,19 @@
 package com.deskar.wikipediasearch.view
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.deskar.wikipediasearch.R
-import com.deskar.wikipediasearch.model.SearchDataSource
 import com.deskar.wikipediasearch.model.SearchRepository
-import com.deskar.wikipediasearch.networking.ApiClient
-import com.deskar.wikipediasearch.networking.ApiService
+import com.deskar.wikipediasearch.model.SearchResult
 import com.deskar.wikipediasearch.view.adapter.SearchAdapter
 import com.deskar.wikipediasearch.view_model.SearchViewModel
-import com.deskar.wikipediasearch.view_model.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_search.*
 
 class SearchActivity : AppCompatActivity() {
@@ -27,31 +26,15 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
-        //setupViewModel()
-        //val apiService: ApiService? = ApiClient.build()
         searchRepository = SearchRepository()
         viewModel = getViewModel()
+        recycler_search.layoutManager = LinearLayoutManager(this)
+
         textView_search.setOnClickListener {
-            searchQuery(editText_search.text.toString())
+            searchWikipedia(editText_search.text.toString())
         }
     }
 
-    private fun setupUI(adapter: SearchAdapter) {
-        recycler_search.layoutManager = LinearLayoutManager(this)
-        recycler_search.adapter = adapter
-    }
-
-    private fun searchQuery(query: String) {
-
-        viewModel.loadSearchResults(query)
-        viewModel.searchResults.observe(this, Observer {
-            adapter = SearchAdapter(it, this)
-            setupUI(adapter)
-        })
-        viewModel.responseTimeResult.observe(this, Observer {
-            textView_searchTime.text = it.toString()
-        })
-    }
 
     private fun getViewModel(): SearchViewModel {
 
@@ -62,4 +45,60 @@ class SearchActivity : AppCompatActivity() {
         })[SearchViewModel::class.java]
 
     }
+
+    private fun searchWikipedia(query: String) {
+        viewModel.loadSearchResults(query)
+        setData()
+    }
+
+    private fun setData() {
+
+        viewModel.isViewLoading.observe(this, viewLoadingObserver)
+        viewModel.searchResults.observe(this, searchResultsObserver)
+        viewModel.responseTimeResult.observe(this, responseTimeObserver)
+        viewModel.onMessageError.observe(this, messageErrorObserver)
+        viewModel.isEmptyList.observe(this, emptyListObserver)
+
+    }
+
+    private val viewLoadingObserver = Observer<Boolean> {
+        val visibilityProgressBar = if (it) View.VISIBLE else View.INVISIBLE
+        val visibilityTextViewSearch = if (it) View.INVISIBLE else View.VISIBLE
+        progressBar.visibility = visibilityProgressBar
+        textView_search.visibility = visibilityTextViewSearch
+    }
+
+    private val searchResultsObserver = Observer<List<SearchResult>> {
+        adapter = SearchAdapter(it, this)
+        setupUI(adapter)
+    }
+
+    @SuppressLint("SetTextI18n")
+    private val responseTimeObserver = Observer<String> {
+        textView_searchTime.text = getString(R.string.search_time) +
+                it.toString() +
+                getString(R.string.sec)
+    }
+
+    @SuppressLint("SetTextI18n")
+    private val messageErrorObserver = Observer<Any> {
+        recycler_search.visibility = View.INVISIBLE
+        textView_messageError.visibility = View.VISIBLE
+        textView_emptyList.visibility = View.INVISIBLE
+        textView_messageError.text = getString(R.string.error) + it.toString()
+    }
+
+    private val emptyListObserver = Observer<Boolean> {
+        recycler_search.visibility = View.INVISIBLE
+        textView_messageError.visibility = View.INVISIBLE
+        textView_emptyList.visibility = View.VISIBLE
+    }
+
+    private fun setupUI(adapter: SearchAdapter) {
+        recycler_search.visibility = View.VISIBLE
+        textView_messageError.visibility = View.INVISIBLE
+        textView_emptyList.visibility = View.INVISIBLE
+        recycler_search.adapter = adapter
+    }
+
 }

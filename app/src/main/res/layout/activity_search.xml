@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.SearchActivity">
+    tools:context=".view.SearchActivity">
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -13,10 +13,10 @@
         android:layout_marginStart="@dimen/size_8"
         android:layout_marginTop="@dimen/size_8"
         android:layout_marginEnd="@dimen/size_8"
+        android:visibility="invisible"
         app:layout_constraintLeft_toRightOf="@id/editText_search"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="invisible"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editText_search"
@@ -26,9 +26,10 @@
         android:layout_marginTop="@dimen/size_8"
         android:layout_marginEnd="@dimen/size_8"
         android:hint="@string/search"
+        android:inputType="text"
         android:textSize="@dimen/size_17"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/textView_search"
+        app:layout_constraintRight_toLeftOf="@id/progressBar"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -36,7 +37,7 @@
         android:layout_width="@dimen/size_70"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_16"
-        android:text="Search"
+        android:text="@string/search2"
         android:textSize="@dimen/size_17"
         app:layout_constraintLeft_toRightOf="@id/editText_search"
         app:layout_constraintRight_toRightOf="parent"
@@ -44,16 +45,16 @@
 
 
     <TextView
+        android:id="@+id/textView_searchTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView_searchTime"
-        app:layout_constraintTop_toBottomOf="@id/editText_search"
-        tools:text="SearchTime: 15"
-        android:textColor="@color/colorAccent"
-        android:layout_marginTop="@dimen/size_8"
         android:layout_marginStart="@dimen/size_16"
+        android:layout_marginTop="@dimen/size_8"
+        android:textColor="@color/colorAccent"
         android:textStyle="bold"
-        />
+        app:layout_constraintTop_toBottomOf="@id/editText_search"
+        tools:text="SearchTime: 15" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_search"
         android:layout_width="0sp"
@@ -61,10 +62,37 @@
         android:layout_marginStart="@dimen/size_8"
         android:layout_marginTop="@dimen/size_8"
         android:layout_marginEnd="@dimen/size_8"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_searchTime"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView_searchTime" />
+
+    <TextView
+        android:id="@+id/textView_messageError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="@dimen/size_20"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView_searchTime"
+        tools:text="Error: " />
+
+    <TextView
+        android:id="@+id/textView_emptyList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/there_is_no_results"
+        android:textAlignment="center"
+        android:textSize="@dimen/size_20"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView_searchTime" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
