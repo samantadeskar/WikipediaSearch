@@ -22,29 +22,16 @@ class SearchActivity : AppCompatActivity() {
 
     private val searchViewModel: SearchViewModel by viewModel()
     private lateinit var adapter: SearchAdapter
-    private val searchRepository: SearchRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
-
-        getViewModel()
 
         recycler_search.layoutManager = LinearLayoutManager(this)
 
         textView_search.setOnClickListener {
             searchWikipedia(editText_search.text.toString())
         }
-    }
-
-    private fun getViewModel(): SearchViewModel {
-
-        return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return SearchViewModel(searchRepository) as T
-            }
-        })[SearchViewModel::class.java]
-
     }
 
     private fun searchWikipedia(query: String) {
