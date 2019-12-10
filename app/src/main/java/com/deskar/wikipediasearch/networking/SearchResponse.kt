@@ -9,5 +9,4 @@ data class SearchResponse(
     val searchResult: List<SearchResult>?,
     val searchInformation: SearchInformation?,
     val msg: String?
-) {
-}
+)

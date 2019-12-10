@@ -15,26 +15,27 @@ import com.deskar.wikipediasearch.model.SearchResult
 import com.deskar.wikipediasearch.view.adapter.SearchAdapter
 import com.deskar.wikipediasearch.view_model.SearchViewModel
 import kotlinx.android.synthetic.main.activity_search.*
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: SearchViewModel
+    private val searchViewModel: SearchViewModel by viewModel()
     private lateinit var adapter: SearchAdapter
-    private lateinit var searchRepository: SearchRepository
+    private val searchRepository: SearchRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
-        searchRepository = SearchRepository()
-        viewModel = getViewModel()
+        getViewModel()
+
         recycler_search.layoutManager = LinearLayoutManager(this)
 
         textView_search.setOnClickListener {
             searchWikipedia(editText_search.text.toString())
         }
     }
-
 
     private fun getViewModel(): SearchViewModel {
 
@@ -47,17 +48,17 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun searchWikipedia(query: String) {
-        viewModel.loadSearchResults(query)
+        searchViewModel.loadSearchResults(query)
         setData()
     }
 
     private fun setData() {
 
-        viewModel.isViewLoading.observe(this, viewLoadingObserver)
-        viewModel.searchResults.observe(this, searchResultsObserver)
-        viewModel.responseTimeResult.observe(this, responseTimeObserver)
-        viewModel.onMessageError.observe(this, messageErrorObserver)
-        viewModel.isEmptyList.observe(this, emptyListObserver)
+        searchViewModel.isViewLoading.observe(this, viewLoadingObserver)
+        searchViewModel.searchResults.observe(this, searchResultsObserver)
+        searchViewModel.responseTimeResult.observe(this, responseTimeObserver)
+        searchViewModel.onMessageError.observe(this, messageErrorObserver)
+        searchViewModel.isEmptyList.observe(this, emptyListObserver)
 
     }
 
